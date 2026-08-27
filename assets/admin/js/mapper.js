@@ -6,16 +6,27 @@
  * box to a Fluent Forms field. Coordinates are stored in PDF points with a
  * top-left origin (matching FPDF's coordinate system at unit "pt").
  *
+ * This file is an ES module: PDF.js 6 is ESM-only, so it is imported here
+ * rather than enqueued as a separate global script. The import is dynamic and
+ * runs after the guard below, so the 500 KB library is only fetched on a screen
+ * that actually renders a PDF.
+ *
  * @package FFPM
  */
 
-/* global pdfjsLib, ffpmMapper */
-( function () {
+/* global ffpmMapper */
+( async function () {
 	'use strict';
 
 	if ( ! document.getElementById( 'ffpm-mapper-app' ) || ! ffpmMapper.feedId ) {
 		return;
 	}
+
+	// Resolve against the document, not this module's own URL — a bare import()
+	// specifier is relative to the importing file, which would look for the
+	// library under assets/admin/js/. plugin_dir_url() gives an absolute URL
+	// today, but this keeps it correct if that ever changes.
+	var pdfjsLib = await import( new URL( ffpmMapper.pdfjsSrc, document.baseURI ).href );
 
 	pdfjsLib.GlobalWorkerOptions.workerSrc = ffpmMapper.workerSrc;
 
@@ -77,15 +88,15 @@
 			populateSourceSelects();
 			applySettingsToUi();
 
-			// isEvalSupported must stay false: with eval enabled, PDF.js compiles
-			// glyph outlines via `new Function()`, and a crafted FontMatrix can
-			// inject code into that string (CVE-2024-4367). A font matrix is not
-			// active content, so neither the client-side pdf-lib sanitiser nor the
-			// server-side token scan strips it — this flag is what closes it.
+			// No isEvalSupported flag here: PDF.js 6 compiles glyph outlines to a
+			// Path2D instead of a `new Function()` body, so the FontMatrix
+			// injection behind CVE-2024-4367 has no sink left to reach. Pinning
+			// back to a 3.x/4.x build would reintroduce it — that eval path was
+			// only ever gated by a flag, and a font matrix survives both the
+			// pdf-lib sanitiser and the server-side token scan.
 			return pdfjsLib.getDocument( {
 				url: d.template.fileUrl,
-				withCredentials: true,
-				isEvalSupported: false
+				withCredentials: true
 			} ).promise;
 		} )
 		.then( function ( pdf ) {
@@ -102,7 +113,12 @@
 		state.pdf.getPage( state.pageNum ).then( function ( page ) {
 			var baseViewport = page.getViewport( { scale: 1 } );
 			var paneWidth = holder.parentElement.clientWidth - 20;
-			state.scale = Math.min( 1.5, paneWidth / baseViewport.width );
+
+			// A pane that has not been laid out yet, or is narrower than the
+			// gutter, yields a zero or negative scale. Canvas silently falls back
+			// to 300x150 for a negative width, so the page would render blank
+			// with no error at all — clamp instead.
+			state.scale = Math.min( 1.5, Math.max( 0.25, paneWidth / baseViewport.width ) );
 			state.pageHeightPt = baseViewport.height;
 
 			var viewport = page.getViewport( { scale: state.scale } );

@@ -4,7 +4,7 @@ Tags: fluent forms, pdf, form to pdf, pdf generator, email attachment
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 0.2.1
+Stable tag: 0.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,7 +35,7 @@ This plugin ships unmodified releases of four open-source libraries:
 
 * FPDI 2.6.8 (MIT) — https://github.com/Setasign/FPDI
 * FPDF 1.9.0 (permissive) — https://github.com/Setasign/FPDF
-* PDF.js 3.11.174 (Apache-2.0) — https://github.com/mozilla/pdf.js
+* PDF.js 6.2.108 (Apache-2.0) — https://github.com/mozilla/pdf.js
 * pdf-lib 1.17.1 (MIT) — https://github.com/Hopding/pdf-lib
 
 PDF.js and pdf-lib are the official minified distributions published to npm.
@@ -85,12 +85,24 @@ behind. Deactivating alone keeps all data intact.
 
 == Upgrade Notice ==
 
+= 0.3.0 =
+Upgrades the bundled PDF.js to 6.2.108, which removes the eval-based glyph
+compiler behind CVE-2024-4367 entirely rather than gating it behind a flag. The
+mapper screen now needs a browser with ES module support — every browser
+WordPress 6.5 supports already has it.
+
 = 0.2.1 =
 Security release. Closes an arbitrary-code-execution path (CVE-2024-4367) that a
 crafted PDF template could trigger in the mapper screen. Update immediately if
 you accept PDF templates from anyone outside your organisation.
 
 == Changelog ==
+
+= 0.3.0 =
+* Security: upgrade bundled PDF.js from 3.11.174 to 6.2.108. Version 6 compiles glyph outlines to a Path2D rather than a `new Function()` body, so the CVE-2024-4367 injection sink no longer exists — 0.2.1 only disabled it via the `isEvalSupported` flag, which version 6 has removed along with the code path.
+* The mapper is now an ES module and imports PDF.js itself. PDF.js 6 is ESM-only, and the dynamic import means the 500 KB library is fetched only on the screen that renders a PDF, not on every Feeds page view.
+* Fix: clamp the render scale. A mapper pane that had not been laid out yet produced a negative scale, and a canvas silently falls back to 300x150 for a negative width, so the template rendered blank with no error.
+* The bundled PDF.js files keep their `.js` extension despite holding ES module source: module scripts and module workers are rejected unless the host serves a JavaScript MIME type, and `.mjs` is still served as application/octet-stream on plenty of shared hosting.
 
 = 0.2.1 =
 * Security: disable the PDF.js eval-based glyph compiler in the mapper. A crafted font matrix in an uploaded template could otherwise execute arbitrary JavaScript in the admin session (CVE-2024-4367) — a font matrix is not active content, so neither the client-side sanitiser nor the server-side token scan removed it.

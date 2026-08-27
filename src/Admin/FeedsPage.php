@@ -51,6 +51,7 @@ final class FeedsPage {
 	 */
 	public function register(): void {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
+		add_filter( 'script_loader_tag', array( $this, 'module_script_tag' ), 10, 3 );
 		add_action( 'wp_ajax_ffpm_create_feed', array( $this, 'handle_create' ) );
 		add_action( 'wp_ajax_ffpm_delete_feed', array( $this, 'handle_delete' ) );
 		add_action( 'wp_ajax_ffpm_mapper_data', array( $this, 'handle_mapper_data' ) );
@@ -70,8 +71,10 @@ final class FeedsPage {
 
 		wp_enqueue_style( 'ffpm-mapper', FFPM_PLUGIN_URL . 'assets/admin/css/mapper.css', array(), FFPM_VERSION );
 
-		wp_enqueue_script( 'ffpm-pdfjs', FFPM_PLUGIN_URL . 'assets/vendor/pdfjs/pdf.min.js', array(), '3.11.174', true );
-		wp_enqueue_script( 'ffpm-mapper', FFPM_PLUGIN_URL . 'assets/admin/js/mapper.js', array( 'ffpm-pdfjs' ), FFPM_VERSION, true );
+		// PDF.js 6 ships as an ES module, so the mapper is a module too and
+		// imports the library itself — no separate script handle, and the
+		// browser resolves the worker as a module worker from workerSrc.
+		wp_enqueue_script( 'ffpm-mapper', FFPM_PLUGIN_URL . 'assets/admin/js/mapper.js', array(), FFPM_VERSION, true );
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only view state.
 		$feed_id = isset( $_GET['feed'] ) ? absint( $_GET['feed'] ) : 0;
@@ -83,6 +86,11 @@ final class FeedsPage {
 				'ajaxUrl'   => admin_url( 'admin-ajax.php' ),
 				'nonce'     => wp_create_nonce( self::NONCE_ACTION ),
 				'feedId'    => $feed_id,
+				// Both files hold ES module source but keep the .js extension:
+				// module scripts and module workers are rejected unless the host
+				// serves a JavaScript MIME type, and .mjs is still served as
+				// application/octet-stream on plenty of shared hosting.
+				'pdfjsSrc'  => FFPM_PLUGIN_URL . 'assets/vendor/pdfjs/pdf.min.js',
 				'workerSrc' => FFPM_PLUGIN_URL . 'assets/vendor/pdfjs/pdf.worker.min.js',
 				'i18n'      => array(
 					'unmapped'      => __( '— not mapped —', 'pdf-mapper-for-fluent-forms' ),
@@ -94,6 +102,28 @@ final class FeedsPage {
 					'rowHeightZero' => __( 'Row height is 0, so all repeater rows will print on top of each other. Set a row height (the vertical distance between rows, in points) before saving. Save anyway?', 'pdf-mapper-for-fluent-forms' ),
 				),
 			)
+		);
+	}
+
+	/**
+	 * Emit the mapper script as an ES module.
+	 *
+	 * WordPress has no core way to mark a classic handle as a module, and
+	 * wp_enqueue_script_module() would not let wp_localize_script() attach the
+	 * config object, so the tag is rewritten here instead.
+	 *
+	 * @param string $tag    Full script tag.
+	 * @param string $handle Script handle.
+	 * @param string $src    Script source URL.
+	 */
+	public function module_script_tag( string $tag, string $handle, string $src ): string {
+		if ( 'ffpm-mapper' !== $handle ) {
+			return $tag;
+		}
+
+		return sprintf(
+			'<script type="module" src="%s" id="ffpm-mapper-js"></script>' . "\n",
+			esc_url( $src )
 		);
 	}
 

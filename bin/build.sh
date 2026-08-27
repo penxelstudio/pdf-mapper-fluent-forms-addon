@@ -20,7 +20,10 @@ rsync -a "$PLUGIN_DIR/" "$DEST/" \
   --exclude /dist \
   --exclude /bin \
   --exclude node_modules \
+  --exclude /.git \
+  --exclude /.github \
   --exclude .gitignore \
+  --exclude .gitattributes \
   --exclude phpcs.xml \
   --exclude "*.zip" \
   --exclude .DS_Store
