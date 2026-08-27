@@ -1,0 +1,155 @@
+/**
+ * Visual mapper styles.
+ */
+
+.ffpm-toolbar {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 12px 0 16px;
+	flex-wrap: wrap;
+}
+
+.ffpm-toolbar-sep {
+	width: 1px;
+	height: 24px;
+	background: #c3c4c7;
+	margin: 0 4px;
+}
+
+.ffpm-mapper-body {
+	display: flex;
+	gap: 16px;
+	align-items: flex-start;
+}
+
+.ffpm-canvas-pane {
+	flex: 1 1 auto;
+	min-width: 0;
+	overflow: auto;
+	background: #f0f0f1;
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+	padding: 10px;
+}
+
+#ffpm-canvas-holder {
+	position: relative;
+	margin: 0 auto;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+#ffpm-canvas-holder.ffpm-placing {
+	cursor: crosshair;
+}
+
+#ffpm-overlay {
+	position: absolute;
+	inset: 0;
+}
+
+.ffpm-box {
+	position: absolute;
+	box-sizing: border-box;
+	font-size: 9px;
+	line-height: 1.1;
+	overflow: hidden;
+	cursor: pointer;
+	white-space: nowrap;
+}
+
+.ffpm-box-detected {
+	border: 1px dashed #2271b1;
+	background: rgba(34, 113, 177, 0.08);
+}
+
+.ffpm-box-detected:hover {
+	background: rgba(34, 113, 177, 0.22);
+}
+
+.ffpm-box-bound {
+	border: 1px solid #00a32a;
+	background: rgba(0, 163, 42, 0.14);
+	color: #1d2327;
+	padding: 1px 2px;
+}
+
+.ffpm-box-repeater {
+	border-color: #dba617;
+	background: rgba(219, 166, 23, 0.16);
+}
+
+.ffpm-box-selected {
+	outline: 2px solid #d63638;
+	z-index: 5;
+}
+
+.ffpm-side-pane {
+	flex: 0 0 320px;
+	max-width: 320px;
+}
+
+.ffpm-panel {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+	padding: 12px 14px;
+	margin-bottom: 14px;
+}
+
+.ffpm-panel h3 {
+	margin: 0 0 10px;
+}
+
+.ffpm-panel label {
+	display: block;
+	font-weight: 600;
+	margin-bottom: 2px;
+}
+
+.ffpm-panel input[type="text"],
+.ffpm-panel input[type="number"],
+.ffpm-panel select {
+	width: 100%;
+}
+
+.ffpm-panel input[type="checkbox"] + label,
+.ffpm-panel label input[type="checkbox"] {
+	display: inline-block;
+	font-weight: 400;
+	margin-right: 4px;
+}
+
+.ffpm-grid-2 {
+	display: flex;
+	gap: 8px;
+}
+
+.ffpm-grid-2 > span {
+	flex: 1;
+}
+
+#ffpm-binding-list {
+	margin: 0;
+	max-height: 220px;
+	overflow: auto;
+}
+
+#ffpm-binding-list li {
+	padding: 3px 6px;
+	border-radius: 3px;
+	cursor: pointer;
+	margin: 0;
+}
+
+#ffpm-binding-list li:hover {
+	background: #f0f6fc;
+}
+
+#ffpm-binding-list li.ffpm-selected {
+	background: #f0f6fc;
+	outline: 1px solid #2271b1;
+}
+
+.ffpm-col-list{margin:4px 0 8px 18px;padding:0;font-size:12px;}
+.ffpm-col-list li{margin:1px 0;color:#1d2327;}

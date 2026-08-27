@@ -1,0 +1,7 @@
+# Composer dependencies at the plugin root only — assets/vendor holds the
+# bundled JS libraries (PDF.js, pdf-lib) and must stay tracked.
+/vendor/
+/dist/
+node_modules/
+*.zip
+.DS_Store

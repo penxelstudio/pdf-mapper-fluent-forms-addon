@@ -1,0 +1,30 @@
+{
+    "name": "penxelstudio/pdf-mapper-for-fluent-forms",
+    "description": "Map Fluent Forms fields onto any uploaded PDF template and auto-generate filled PDFs on submission.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "php": ">=8.1",
+        "setasign/fpdi": "2.6.8",
+        "setasign/fpdf": "1.9.0"
+    },
+    "require-dev": {
+        "wp-coding-standards/wpcs": "^3.4.1",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "FFPM\\": "src/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "scripts": {
+        "lint": "phpcs",
+        "lint:fix": "phpcbf"
+    }
+}
