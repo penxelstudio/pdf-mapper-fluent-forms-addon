@@ -24,9 +24,11 @@ rsync -a "$PLUGIN_DIR/" "$DEST/" \
   --exclude /.github \
   --exclude .gitignore \
   --exclude .gitattributes \
+  --exclude .editorconfig \
   --exclude phpcs.xml \
   --exclude "*.zip" \
-  --exclude .DS_Store
+  --exclude .DS_Store \
+  --exclude /README.md
 
 # composer.lock is copied in on purpose and deleted after: installing from the
 # lock pins the exact vendor tree that was audited. Without it Composer resolves

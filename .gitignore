@@ -1,7 +1,25 @@
 # Composer dependencies at the plugin root only — assets/vendor holds the
-# bundled JS libraries (PDF.js, pdf-lib) and must stay tracked.
+# bundled JS libraries (PDF.js, pdf-lib) and must stay tracked, because
+# bin/build.sh ships them as-is.
 /vendor/
+
+# Build output
 /dist/
-node_modules/
 *.zip
+
+# Tooling
+node_modules/
+.phpcs-cache
+.phpunit.result.cache
+
+# Editors and OS
 .DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.sublime-*
+
+# Never commit credentials or per-machine config
+.env
+.env.*
+!.env.example

@@ -1,0 +1,17 @@
+* text=auto eol=lf
+
+*.php     text diff=php
+*.js      text
+*.css     text
+*.txt     text
+*.md      text
+*.json    text
+*.sh      text eol=lf
+*.pdf     binary
+*.png     binary
+*.jpg     binary
+*.ttf     binary
+
+# Bundled upstream builds — keep them out of GitHub's language statistics so
+# the repo reads as PHP, not as 1.8 MB of minified JavaScript.
+assets/vendor/**  linguist-vendored
