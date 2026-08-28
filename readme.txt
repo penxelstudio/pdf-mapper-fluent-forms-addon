@@ -4,7 +4,7 @@ Tags: fluent forms, pdf, form to pdf, pdf generator, email attachment
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 0.3.0
+Stable tag: 0.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,6 +85,11 @@ behind. Deactivating alone keeps all data intact.
 
 == Upgrade Notice ==
 
+= 0.3.1 =
+Fixes "Remove binding" and Save silently doing nothing in the mapper once a
+browser has suppressed dialogs for the tab. Recommended for anyone editing
+mappings.
+
 = 0.3.0 =
 Upgrades the bundled PDF.js to 6.2.108, which removes the eval-based glyph
 compiler behind CVE-2024-4367 entirely rather than gating it behind a flag. The
@@ -97,6 +102,10 @@ crafted PDF template could trigger in the mapper screen. Update immediately if
 you accept PDF templates from anyone outside your organisation.
 
 == Changelog ==
+
+= 0.3.1 =
+* Fix: "Remove binding" could become permanently dead in the mapper. It was gated on `window.confirm()`, and a browser that has had "prevent this page from creating additional dialogs" triggered — easy to hit while placing many pins — makes `confirm()` return false silently for the rest of the tab's life. The button then did nothing, with nothing in the console to explain it. Removing a binding is now immediate, with an inline confirmation message; nothing is persisted until Save either way.
+* Fix: the same failure could block saving entirely. The repeater row-height warning also gated on `window.confirm()`, so a tab with dialogs suppressed could not save a mapping at all. It is now a two-step inline prompt — the first click warns, the second saves — and the warning resets when the row height or rows-per-page changes.
 
 = 0.3.0 =
 * Security: upgrade bundled PDF.js from 3.11.174 to 6.2.108. Version 6 compiles glyph outlines to a Path2D rather than a `new Function()` body, so the CVE-2024-4367 injection sink no longer exists — 0.2.1 only disabled it via the `isEvalSupported` flag, which version 6 has removed along with the code path.

@@ -93,13 +93,14 @@ final class FeedsPage {
 				'pdfjsSrc'  => FFPM_PLUGIN_URL . 'assets/vendor/pdfjs/pdf.min.js',
 				'workerSrc' => FFPM_PLUGIN_URL . 'assets/vendor/pdfjs/pdf.worker.min.js',
 				'i18n'      => array(
-					'unmapped'      => __( '— not mapped —', 'pdf-mapper-for-fluent-forms' ),
-					'saved'         => __( 'Mapping saved.', 'pdf-mapper-for-fluent-forms' ),
-					'saveFailed'    => __( 'Save failed. Please try again.', 'pdf-mapper-for-fluent-forms' ),
-					'confirmDel'    => __( 'Remove this binding?', 'pdf-mapper-for-fluent-forms' ),
-					'rowNumber'     => __( 'Row number (auto)', 'pdf-mapper-for-fluent-forms' ),
-					'badImport'     => __( 'That file is not a valid mapping export.', 'pdf-mapper-for-fluent-forms' ),
-					'rowHeightZero' => __( 'Row height is 0, so all repeater rows will print on top of each other. Set a row height (the vertical distance between rows, in points) before saving. Save anyway?', 'pdf-mapper-for-fluent-forms' ),
+					'unmapped'       => __( '— not mapped —', 'pdf-mapper-for-fluent-forms' ),
+					'saved'          => __( 'Mapping saved.', 'pdf-mapper-for-fluent-forms' ),
+					'saveFailed'     => __( 'Save failed. Please try again.', 'pdf-mapper-for-fluent-forms' ),
+					/* translators: %s: the form field the removed binding was mapped to */
+					'bindingRemoved' => __( 'Removed binding: %s. Save the mapping to keep this change.', 'pdf-mapper-for-fluent-forms' ),
+					'rowNumber'      => __( 'Row number (auto)', 'pdf-mapper-for-fluent-forms' ),
+					'badImport'      => __( 'That file is not a valid mapping export.', 'pdf-mapper-for-fluent-forms' ),
+					'rowHeightZero'  => __( 'Row height is 0, so all repeater rows will print on top of each other. Set a row height (the vertical distance between rows, in points), or click Save again to save anyway.', 'pdf-mapper-for-fluent-forms' ),
 				),
 			)
 		);

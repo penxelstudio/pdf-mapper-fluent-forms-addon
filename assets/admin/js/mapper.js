@@ -304,14 +304,37 @@
 			} );
 		} );
 
+		// No confirm() here on purpose. A browser that has had "prevent this page
+		// from creating additional dialogs" triggered — easy to hit while placing
+		// a lot of pins — makes confirm() return false silently for the rest of
+		// the tab's life, which left this button permanently dead with nothing in
+		// the console to explain it. Removing a binding is cheap to undo anyway:
+		// nothing is persisted until Save, and the box can just be placed again.
 		$( 'ffpm-bind-delete' ).addEventListener( 'click', function () {
-			if ( state.selected > -1 && window.confirm( ffpmMapper.i18n.confirmDel ) ) {
-				state.mapping.fields.splice( state.selected, 1 );
-				state.selected = -1;
-				$( 'ffpm-binding-panel' ).hidden = true;
-				drawOverlay();
+			if ( state.selected < 0 ) {
+				return;
 			}
+			var removed = state.mapping.fields[ state.selected ];
+			state.mapping.fields.splice( state.selected, 1 );
+			state.selected = -1;
+			$( 'ffpm-binding-panel' ).hidden = true;
+			drawOverlay();
+			flashStatus( ffpmMapper.i18n.bindingRemoved.replace( '%s', sourceLabel( removed.source, removed.sub ) ) );
 		} );
+	}
+
+	/**
+	 * Show a transient message next to the Save button.
+	 *
+	 * @param {string} message Text to show.
+	 */
+	function flashStatus( message ) {
+		var el = $( 'ffpm-save-status' );
+		el.textContent = message;
+		window.clearTimeout( flashStatus.timer );
+		flashStatus.timer = window.setTimeout( function () {
+			el.textContent = '';
+		}, 4000 );
 	}
 
 	/* ---------- source selects ---------- */
@@ -542,11 +565,25 @@
 		} );
 	} );
 
+	// The row-height warning is a two-step inline prompt rather than a confirm()
+	// dialog: a tab with dialogs suppressed would otherwise be unable to save at
+	// all, since confirm() returns false there and the save silently aborted.
+	var heightWarningAcknowledged = false;
+
+	[ 'ffpm-repeater-height', 'ffpm-repeater-rows' ].forEach( function ( id ) {
+		$( id ).addEventListener( 'input', function () {
+			heightWarningAcknowledged = false;
+		} );
+	} );
+
 	$( 'ffpm-save' ).addEventListener( 'click', function () {
 		var warning = repeaterHeightWarning();
-		if ( warning && ! window.confirm( warning ) ) {
+		if ( warning && ! heightWarningAcknowledged ) {
+			heightWarningAcknowledged = true;
+			flashStatus( warning );
 			return;
 		}
+		heightWarningAcknowledged = false;
 		state.mapping.repeater = collectRepeater();
 		var statusEl = $( 'ffpm-save-status' );
 		ajax( {
