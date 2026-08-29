@@ -4,7 +4,7 @@ Tags: fluent forms, pdf, form to pdf, pdf generator, email attachment
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 0.3.2
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -76,6 +76,22 @@ relies on Fluent Forms sending the notification within the same request as the
 submission, which is the default. If your site is configured to process
 notification feeds asynchronously, the attachment may not be included.
 
+= I run nginx. Is the document storage actually protected? =
+
+Not by the deny rules, no. The plugin writes `.htaccess` and `web.config` into
+its storage directory on activation, and nginx honours neither — WordPress
+cannot write nginx configuration. On nginx a stored document is reachable by
+URL, and what keeps it unreachable in practice is that nothing about the path is
+guessable: a 16-character random directory plus 32 random characters in every
+file name.
+
+If you want a real deny rule, add this to your server block:
+
+`location ~* /wp-content/uploads/ffpm-[A-Za-z0-9]+/ { deny all; return 404; }`
+
+Downloads from PDF Mapper - Documents keep working either way; those are
+streamed by PHP after a capability check and never touch the static path.
+
 = What happens to my data if I uninstall? =
 
 Everything is removed: the three plugin tables, all options, and the entire
@@ -84,6 +100,11 @@ documents hold applicant personal data, uninstall deliberately leaves nothing
 behind. Deactivating alone keeps all data intact.
 
 == Upgrade Notice ==
+
+= 1.0.0 =
+First stable release. Generated documents now carry 32 random characters in
+their file name instead of 8 — existing documents keep their current names and
+stay downloadable. Read the new nginx note in the FAQ if you host on nginx.
 
 = 0.3.1 =
 Fixes "Remove binding" and Save silently doing nothing in the mapper once a
@@ -102,6 +123,14 @@ crafted PDF template could trigger in the mapper screen. Update immediately if
 you accept PDF templates from anyone outside your organisation.
 
 == Changelog ==
+
+= 1.0.0 =
+First stable release. No functional change from 0.3.2 beyond the hardening below; the 0.x series was development.
+* Harden: generated document file names now carry 32 random characters instead of 8, matching what templates already used. The readable part of a document name is predictable — an admin-set pattern plus a sequential submission id — and on nginx the file name is the only barrier in front of the file, so the documents holding personal data should not have had weaker names than the blank templates. Existing documents keep their names and remain downloadable.
+* Harden: storage directories now also get a `web.config` deny rule for IIS, alongside the existing `.htaccess`.
+* Document the nginx gap honestly. nginx reads neither file and WordPress cannot write nginx config, so on nginx the protection is unguessable paths rather than access control. The readme FAQ, README.md and a new SECURITY.md all carry the location block to add for a real deny rule.
+* Add `languages/pdf-mapper-for-fluent-forms.pot` so the declared `Domain Path` is no longer an empty promise. 141 translatable strings.
+* Add SECURITY.md with a private disclosure route and supported-version policy.
 
 = 0.3.2 =
 * Remove the Settings screen and its menu entry. It has been an empty placeholder since 0.1.0 — every option the plugin has lives on the feed itself — so it only added a dead end to the menu.

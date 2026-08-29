@@ -3,7 +3,7 @@
  * Plugin Name: PDF Mapper for Fluent Forms
  * Plugin URI: https://penxelstudio.com/plugins/pdf-mapper-for-fluent-forms
  * Description: Map Fluent Forms fields onto any uploaded PDF template and auto-generate filled PDFs on submission, attached to notification emails.
- * Version: 0.3.2
+ * Version: 1.0.0
  * Requires at least: 6.5
  * Requires PHP: 8.1
  * Requires Plugins: fluentform
@@ -19,7 +19,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'FFPM_VERSION', '0.3.2' );
+define( 'FFPM_VERSION', '1.0.0' );
 define( 'FFPM_PLUGIN_FILE', __FILE__ );
 define( 'FFPM_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'FFPM_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

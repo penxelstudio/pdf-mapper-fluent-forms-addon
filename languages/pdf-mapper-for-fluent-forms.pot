@@ -1,0 +1,614 @@
+# Copyright (C) 2026 Penxel Studio
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: PDF Mapper for Fluent Forms 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/pdf-mapper-for-fluent-forms\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-08-29T14:04:01+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: pdf-mapper-for-fluent-forms\n"
+
+#. Plugin Name of the plugin
+#: pdf-mapper-for-fluent-forms.php
+#: pdf-mapper-for-fluent-forms.php:43
+msgid "PDF Mapper for Fluent Forms"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: pdf-mapper-for-fluent-forms.php
+msgid "https://penxelstudio.com/plugins/pdf-mapper-for-fluent-forms"
+msgstr ""
+
+#. Description of the plugin
+#: pdf-mapper-for-fluent-forms.php
+msgid "Map Fluent Forms fields onto any uploaded PDF template and auto-generate filled PDFs on submission, attached to notification emails."
+msgstr ""
+
+#. Author of the plugin
+#: pdf-mapper-for-fluent-forms.php
+msgid "Penxel Studio"
+msgstr ""
+
+#. Author URI of the plugin
+#: pdf-mapper-for-fluent-forms.php
+msgid "https://penxelstudio.com"
+msgstr ""
+
+#. translators: %s: current PHP version
+#: pdf-mapper-for-fluent-forms.php:58
+#, php-format
+msgid "PHP 8.1 or newer is required. Your server runs PHP %s."
+msgstr ""
+
+#: pdf-mapper-for-fluent-forms.php:67
+msgid "Plugin autoloader is missing. Please reinstall the plugin from the official zip."
+msgstr ""
+
+#: pdf-mapper-for-fluent-forms.php:74
+msgid "Fluent Forms must be installed and active."
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:85
+#: src/Admin/Menu.php:90
+msgid "Generated Documents"
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:89
+msgid "Form:"
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:91
+msgid "All forms"
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:96
+msgid "Filter"
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:97
+msgid "Export CSV"
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:104
+msgid "File"
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:105
+msgid "Form / Submission"
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:106
+#: src/Admin/FeedsPage.php:191
+msgid "Feed"
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:107
+#: src/Admin/FeedsPage.php:194
+msgid "Status"
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:108
+msgid "Date"
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:109
+#: src/Admin/FeedsPage.php:195
+#: src/Admin/TemplatesPage.php:130
+msgid "Actions"
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:114
+msgid "No documents yet."
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:143
+msgid "Regenerate"
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:145
+msgid "Resend"
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:147
+#: src/Admin/FeedsPage.php:220
+#: src/Admin/TemplatesPage.php:146
+msgid "Delete"
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:188
+msgid "Send this PDF to email address:"
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:193
+msgid "Email sent."
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:200
+msgid "Delete this document permanently?"
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:227
+#: src/Admin/DocumentsPage.php:308
+#: src/Admin/FeedsPage.php:506
+msgid "File not found."
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:254
+#: src/Admin/DocumentsPage.php:270
+msgid "Document not found."
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:275
+msgid "The feed for this document was deleted."
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:280
+msgid "Submission data not found."
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:285
+msgid "Generation failed — check the new row for the error."
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:302
+msgid "Invalid email address."
+msgstr ""
+
+#. translators: %s: site name
+#: src/Admin/DocumentsPage.php:315
+#, php-format
+msgid "Document from %s"
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:318
+msgid "Please find the requested document attached."
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:324
+msgid "Email could not be sent — check your SMTP configuration."
+msgstr ""
+
+#: src/Admin/DocumentsPage.php:406
+#: src/Admin/FeedsPage.php:653
+#: src/Admin/TemplatesPage.php:201
+#: src/Admin/TemplatesPage.php:258
+msgid "You are not allowed to do that."
+msgstr ""
+
+#: src/Admin/FeedsPage.php:96
+msgid "— not mapped —"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:97
+msgid "Mapping saved."
+msgstr ""
+
+#: src/Admin/FeedsPage.php:98
+msgid "Save failed. Please try again."
+msgstr ""
+
+#. translators: %s: the form field the removed binding was mapped to
+#: src/Admin/FeedsPage.php:100
+#, php-format
+msgid "Removed binding: %s. Save the mapping to keep this change."
+msgstr ""
+
+#: src/Admin/FeedsPage.php:101
+msgid "Row number (auto)"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:102
+msgid "That file is not a valid mapping export."
+msgstr ""
+
+#: src/Admin/FeedsPage.php:103
+msgid "Row height is 0, so all repeater rows will print on top of each other. Set a row height (the vertical distance between rows, in points), or click Save again to save anyway."
+msgstr ""
+
+#: src/Admin/FeedsPage.php:155
+#: src/Admin/Menu.php:81
+msgid "PDF Feeds"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:156
+msgid "A feed connects a Fluent Form to a PDF template. Each submission generates one document per active feed."
+msgstr ""
+
+#: src/Admin/FeedsPage.php:159
+msgid "Create feed"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:162
+msgid "Feed title"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:166
+msgid "Fluent Form"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:168
+msgid "Select a form…"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:175
+msgid "PDF template"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:177
+msgid "Select a template…"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:183
+msgid "Create & open mapper"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:187
+#: src/Admin/Menu.php:82
+msgid "Feeds"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:192
+msgid "Form"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:193
+msgid "Template"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:200
+msgid "No feeds yet."
+msgstr ""
+
+#: src/Admin/FeedsPage.php:216
+msgid "(deleted template)"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:219
+msgid "Open mapper"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:251
+msgid "Delete this feed and its mapping?"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:275
+#: src/Admin/FeedsPage.php:440
+#: src/Admin/FeedsPage.php:457
+#: src/Admin/FeedsPage.php:533
+msgid "Feed not found."
+msgstr ""
+
+#: src/Admin/FeedsPage.php:282
+msgid "Field Mapper"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:284
+msgid "Back to feeds"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:293
+msgid "+ Place field"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:295
+msgid "Export JSON"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:296
+msgid "Import JSON"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:299
+msgid "Save mapping"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:313
+msgid "Selected binding"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:315
+msgid "Form field"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:319
+msgid "Type"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:321
+msgid "Text"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:322
+msgid "Checkbox (X)"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:323
+msgid "Image (signature / stamp)"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:327
+msgid "Tick when value equals"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:332
+msgid "Font size"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:336
+msgid "Align"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:338
+msgid "Left"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:339
+msgid "Center"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:340
+msgid "Right"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:345
+msgid "Multiline (wrap text)"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:348
+msgid "Repeater column (first row)"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:355
+msgid "Width"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:356
+msgid "Height"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:358
+msgid "Remove binding"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:362
+msgid "Repeater"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:364
+msgid "Repeater field"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:365
+msgid "(none)"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:368
+msgid "Rows / page"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:369
+msgid "Row height (pt)"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:372
+msgid "Fields inside this repeater"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:374
+msgid "These are the fields detected inside the repeater, in order. Place a field box on each PDF column, tick “Repeater column”, then choose which of these fields fills it."
+msgstr ""
+
+#: src/Admin/FeedsPage.php:376
+msgid "Mark bindings as “repeater column” and position them on the first row. Extra rows repeat downward; overflow clones the page."
+msgstr ""
+
+#: src/Admin/FeedsPage.php:380
+msgid "Feed settings"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:381
+msgid "Feed active"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:382
+msgid "Attach PDF to form notification emails"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:384
+msgid "File name pattern"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:389
+msgid "Only generate when…"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:392
+msgid "Field"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:393
+msgid "Is not empty / equals"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:393
+msgid "(leave empty = not empty)"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:398
+msgid "Bindings"
+msgstr ""
+
+#: src/Admin/FeedsPage.php:420
+msgid "Invalid feed data."
+msgstr ""
+
+#: src/Admin/FeedsPage.php:425
+#: src/Admin/FeedsPage.php:550
+msgid "Database error."
+msgstr ""
+
+#: src/Admin/FeedsPage.php:462
+msgid "The template for this feed was deleted."
+msgstr ""
+
+#: src/Admin/FeedsPage.php:544
+msgid "Invalid mapping payload."
+msgstr ""
+
+#: src/Admin/Menu.php:61
+#: src/Admin/Menu.php:62
+msgid "PDF Mapper"
+msgstr ""
+
+#: src/Admin/Menu.php:72
+#: src/Admin/TemplatesPage.php:98
+msgid "PDF Templates"
+msgstr ""
+
+#: src/Admin/Menu.php:73
+#: src/Admin/TemplatesPage.php:121
+msgid "Templates"
+msgstr ""
+
+#: src/Admin/Menu.php:91
+msgid "Documents"
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:80
+msgid "Sanitising and converting PDF…"
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:81
+msgid "Uploading…"
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:82
+msgid "This PDF is password-protected. Remove the password and try again."
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:83
+msgid "This file could not be read as a PDF."
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:84
+msgid "Upload failed. Please try again."
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:85
+msgid "Delete this template? Feeds using it will stop generating documents."
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:101
+msgid "Upload a new template"
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:103
+msgid "The PDF is sanitised in your browser before upload: interactive scripts are removed and the file is converted for generation."
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:107
+msgid "Template title"
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:111
+msgid "PDF file"
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:115
+msgid "Upload template"
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:125
+msgid "Title"
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:126
+msgid "Original file"
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:127
+msgid "Pages"
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:128
+msgid "Size"
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:129
+msgid "Uploaded"
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:135
+msgid "No templates yet. Upload your first PDF above."
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:168
+msgid "Support development"
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:170
+msgid "Support the continued development and maintenance of our plugins. Every donation helps us build new features, fix bugs, and provide better support for the community."
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:174
+msgid "Click here to donate via CHIP"
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:185
+msgid "QR code linking to the CHIP donation page"
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:188
+msgid "Scan to open payment link"
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:206
+msgid "Please provide a template title."
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:212
+msgid "No file received."
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:227
+msgid "Could not store the file. Check uploads directory permissions."
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:245
+msgid "Database error while saving the template."
+msgstr ""
+
+#: src/Admin/TemplatesPage.php:263
+msgid "Template not found."
+msgstr ""
+
+#: src/Templates/PdfValidator.php:50
+msgid "The uploaded file is empty or unreadable."
+msgstr ""
+
+#. translators: %s: maximum file size, e.g. "20 MB"
+#: src/Templates/PdfValidator.php:64
+#, php-format
+msgid "The file exceeds the maximum template size of %s."
+msgstr ""
+
+#: src/Templates/PdfValidator.php:72
+#: src/Templates/PdfValidator.php:77
+msgid "The file is not a PDF document."
+msgstr ""
+
+#. translators: %s: PDF token name, e.g. "/JavaScript"
+#: src/Templates/PdfValidator.php:87
+#, php-format
+msgid "The PDF contains active content (%s) and was rejected. Upload it through this screen with JavaScript enabled so it can be sanitised automatically."
+msgstr ""
+
+#: src/Templates/PdfValidator.php:164
+msgid "This PDF could not be parsed for generation. Upload it through this screen with JavaScript enabled so it can be converted automatically."
+msgstr ""

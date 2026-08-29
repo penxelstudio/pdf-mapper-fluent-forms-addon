@@ -13,10 +13,16 @@ defined( 'ABSPATH' ) || exit;
  * Manages the protected uploads directory.
  *
  * Layout: wp-content/uploads/ffpm-{random}/{templates,documents}/
- * Direct HTTP access is denied via .htaccess (Apache/LiteSpeed); on servers
- * that ignore .htaccess (nginx) the random directory segment plus random file
- * names keep paths unguessable. Files are served only through
- * capability-checked download endpoints.
+ *
+ * Files are served only through capability-checked download endpoints. Direct
+ * HTTP access is denied by .htaccess (Apache/LiteSpeed) and web.config (IIS).
+ *
+ * nginx reads neither, and WordPress cannot write nginx config, so there the
+ * only barrier is that nothing is guessable: a 16-character directory segment
+ * plus a 32-character random component in every stored file name. That is a
+ * deliberate trade, not an oversight — but it is obscurity rather than access
+ * control, so the readme documents a location block for nginx operators who
+ * want a real deny rule.
  */
 final class Storage {
 
@@ -63,6 +69,13 @@ final class Storage {
 				// Apache 2.4 (Require) with 2.2 fallback (Order/Deny); LiteSpeed honours both.
 				$rules = "Require all denied\n<IfModule !mod_authz_core.c>\nOrder deny,allow\nDeny from all\n</IfModule>\n";
 				file_put_contents( $htaccess, $rules ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+			}
+
+			$web_config = $dir . '/web.config';
+			if ( ! file_exists( $web_config ) ) {
+				// IIS equivalent of the rules above.
+				$config = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<configuration>\n\t<system.webServer>\n\t\t<authorization>\n\t\t\t<deny users=\"*\" />\n\t\t</authorization>\n\t</system.webServer>\n</configuration>\n";
+				file_put_contents( $web_config, $config ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
 			}
 
 			$index = $dir . '/index.php';

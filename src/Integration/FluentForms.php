@@ -258,8 +258,12 @@ final class FluentForms {
 		$rendered = trim( substr( (string) $rendered, 0, 100 ), '-.' );
 		$rendered = '' === $rendered ? 'document' : $rendered;
 
-		// Random suffix keeps stored names unguessable even though the
-		// documents directory already denies direct access.
-		return $rendered . '-' . wp_generate_password( 8, false, false ) . '.pdf';
+		// The deny rules only bind on Apache/LiteSpeed. On nginx the file is
+		// reachable by URL, so the name is the last line of defence — and the
+		// readable part of it is predictable (an admin-set pattern plus a
+		// sequential submission id). Match the 32 characters templates already
+		// use rather than leaving documents, which hold the personal data, on a
+		// shorter suffix than the blank forms.
+		return $rendered . '-' . wp_generate_password( 32, false, false ) . '.pdf';
 	}
 }

@@ -69,11 +69,27 @@ Worth knowing before you trust it with applicant data:
 
 - **Every endpoint is authenticated.** All twelve AJAX handlers check a nonce *and* `manage_options`. There is no `wp_ajax_nopriv` handler, no REST route, no shortcode, and no front-end hook.
 - **Uploads are validated three ways** — libmagic MIME, `%PDF-` signature, and a full FPDI parse of every page — then stored under a server-generated random name, so an upload can never land as an executable file.
-- **Generated documents live outside the guessable web path**, in `wp-content/uploads/ffpm-<random>/` with a deny-all `.htaccess`. Servers that ignore `.htaccess` are covered by the unguessable directory and file names. Files are served only through capability-checked endpoints.
+- **Generated documents live outside the guessable web path**, in `wp-content/uploads/ffpm-<random>/`, with deny-all `.htaccess` (Apache/LiteSpeed) and `web.config` (IIS) rules written on activation. Every stored file name carries 32 random characters on top of the 16-character directory segment. Files are served only through capability-checked endpoints. See the nginx note below.
 - **Submitted values cannot point the generator anywhere.** An image binding resolves only to a path contained inside this site's uploads directory, so a crafted value cannot reach an arbitrary file or a remote host.
 - **Uninstall removes everything** — tables, options, and every generated document, on every site of a multisite network. Generated PDFs hold personal data, so deactivation keeps it and uninstall deliberately leaves nothing.
 
-`SECURITY.md` is not published yet; report anything you find through a private issue or to the address on [penxelstudio.com](https://penxelstudio.com).
+**If you run nginx, read this.** nginx honours neither `.htaccess` nor
+`web.config`, and WordPress cannot write nginx configuration. On nginx the only
+barrier in front of a stored document is that its path is unguessable. Add a
+real deny rule to your server block:
+
+```nginx
+location ~* /wp-content/uploads/ffpm-[A-Za-z0-9]+/ {
+    deny all;
+    return 404;
+}
+```
+
+Downloads through **PDF Mapper → Documents** are unaffected — they are streamed
+by PHP after a capability check and never touch the static path.
+
+See [SECURITY.md](SECURITY.md) for the full policy and for how to report a
+vulnerability privately.
 
 ## Development
 
