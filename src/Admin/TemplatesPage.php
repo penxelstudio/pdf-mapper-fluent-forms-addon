@@ -52,6 +52,8 @@ final class TemplatesPage {
 			return;
 		}
 
+		wp_enqueue_style( 'ffpm-templates', FFPM_PLUGIN_URL . 'assets/admin/css/templates.css', array(), FFPM_VERSION );
+
 		wp_enqueue_script(
 			'ffpm-pdf-lib',
 			FFPM_PLUGIN_URL . 'assets/vendor/pdf-lib/pdf-lib.min.js',
@@ -149,6 +151,42 @@ final class TemplatesPage {
 					<?php endif; ?>
 				</tbody>
 			</table>
+
+			<?php $this->render_donation_card(); ?>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Render the support/donation card.
+	 */
+	private function render_donation_card(): void {
+		$donate_url = 'https://pay.chip-in.asia/penxelplugindev';
+		?>
+		<div class="card ffpm-donate">
+			<div class="ffpm-donate__body">
+				<h2><?php esc_html_e( 'Support development', 'pdf-mapper-for-fluent-forms' ); ?></h2>
+				<p>
+					<?php esc_html_e( 'Support the continued development and maintenance of our plugins. Every donation helps us build new features, fix bugs, and provide better support for the community.', 'pdf-mapper-for-fluent-forms' ); ?>
+				</p>
+				<p class="ffpm-donate__link">
+					<a href="<?php echo esc_url( $donate_url ); ?>" target="_blank" rel="noopener noreferrer">
+						<?php esc_html_e( 'Click here to donate via CHIP', 'pdf-mapper-for-fluent-forms' ); ?>
+					</a>
+				</p>
+			</div>
+
+			<div class="ffpm-donate__qr">
+				<a href="<?php echo esc_url( $donate_url ); ?>" target="_blank" rel="noopener noreferrer">
+					<img
+						src="<?php echo esc_url( FFPM_PLUGIN_URL . 'assets/admin/img/chip-donation-qr.png' ); ?>"
+						width="132"
+						height="132"
+						alt="<?php esc_attr_e( 'QR code linking to the CHIP donation page', 'pdf-mapper-for-fluent-forms' ); ?>"
+					/>
+				</a>
+				<span><?php esc_html_e( 'Scan to open payment link', 'pdf-mapper-for-fluent-forms' ); ?></span>
+			</div>
 		</div>
 		<?php
 	}

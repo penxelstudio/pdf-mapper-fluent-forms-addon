@@ -1,0 +1,79 @@
+/**
+ * Templates screen.
+ *
+ * @package FFPM
+ */
+
+.ffpm-donate {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 24px;
+	align-items: flex-start;
+	justify-content: space-between;
+	margin-top: 24px;
+	max-width: 720px;
+}
+
+.ffpm-donate__body {
+	flex: 1 1 320px;
+	min-width: 0;
+}
+
+.ffpm-donate__body h2 {
+	margin-top: 0;
+}
+
+.ffpm-donate__body p {
+	max-width: 60ch;
+}
+
+.ffpm-donate__link {
+	margin-bottom: 0;
+	font-weight: 600;
+}
+
+.ffpm-donate__qr {
+	flex: 0 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+	text-align: center;
+}
+
+.ffpm-donate__qr a {
+	display: block;
+	line-height: 0;
+	border: 1px solid #dcdcde;
+	border-radius: 4px;
+	padding: 8px;
+	background: #fff;
+}
+
+.ffpm-donate__qr a:focus {
+	border-color: #2271b1;
+}
+
+.ffpm-donate__qr img {
+	display: block;
+	width: 132px;
+	height: 132px;
+	/* The source is a 264px 1-bit PNG shown at half size; keep the modules
+	   crisp instead of letting the browser smooth them into grey. */
+	image-rendering: pixelated;
+}
+
+.ffpm-donate__qr span {
+	font-size: 12px;
+	color: #646970;
+}
+
+@media screen and ( max-width: 600px ) {
+	.ffpm-donate {
+		flex-direction: column;
+	}
+
+	.ffpm-donate__qr {
+		align-self: flex-start;
+	}
+}

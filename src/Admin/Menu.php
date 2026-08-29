@@ -93,15 +93,6 @@ final class Menu {
 			self::SLUG . '-documents',
 			array( $this, 'render_documents_page' )
 		);
-
-		add_submenu_page(
-			self::SLUG,
-			__( 'PDF Mapper Settings', 'pdf-mapper-for-fluent-forms' ),
-			__( 'Settings', 'pdf-mapper-for-fluent-forms' ),
-			Plugin::CAPABILITY,
-			self::SLUG . '-settings',
-			array( $this, 'render_settings_page' )
-		);
 	}
 
 	/**
@@ -123,12 +114,5 @@ final class Menu {
 	 */
 	public function render_documents_page(): void {
 		$this->documents_page->render();
-	}
-
-	/**
-	 * Settings screen (Fasa 2+ fills sections in).
-	 */
-	public function render_settings_page(): void {
-		echo '<div class="wrap"><h1>' . esc_html__( 'PDF Mapper Settings', 'pdf-mapper-for-fluent-forms' ) . '</h1></div>';
 	}
 }

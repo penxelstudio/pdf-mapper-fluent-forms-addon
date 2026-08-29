@@ -122,10 +122,10 @@ final class FeedsPage {
 			return $tag;
 		}
 
-		return sprintf(
-			'<script type="module" src="%s" id="ffpm-mapper-js"></script>' . "\n",
-			esc_url( $src )
-		);
+		// This IS the enqueued script; script_loader_tag exists to rewrite its tag.
+		$template = '<script type="module" src="%s" id="ffpm-mapper-js"></script>' . "\n"; // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript
+
+		return sprintf( $template, esc_url( $src ) );
 	}
 
 	/**

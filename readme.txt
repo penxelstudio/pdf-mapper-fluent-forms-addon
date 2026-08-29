@@ -4,7 +4,7 @@ Tags: fluent forms, pdf, form to pdf, pdf generator, email attachment
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 0.3.1
+Stable tag: 0.3.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -102,6 +102,11 @@ crafted PDF template could trigger in the mapper screen. Update immediately if
 you accept PDF templates from anyone outside your organisation.
 
 == Changelog ==
+
+= 0.3.2 =
+* Remove the Settings screen and its menu entry. It has been an empty placeholder since 0.1.0 — every option the plugin has lives on the feed itself — so it only added a dead end to the menu.
+* Add a support card to the Templates screen with a CHIP donation link and a scannable QR code.
+* Fix a PHPCS error introduced in 0.3.0: the `script_loader_tag` filter that emits the mapper as an ES module tripped `WordPress.WP.EnqueuedResources.NonEnqueuedScript`. Annotated, since rewriting the tag of an already-enqueued handle is exactly what that filter is for.
 
 = 0.3.1 =
 * Fix: "Remove binding" could become permanently dead in the mapper. It was gated on `window.confirm()`, and a browser that has had "prevent this page from creating additional dialogs" triggered — easy to hit while placing many pins — makes `confirm()` return false silently for the rest of the tab's life. The button then did nothing, with nothing in the console to explain it. Removing a binding is now immediate, with an inline confirmation message; nothing is persisted until Save either way.
